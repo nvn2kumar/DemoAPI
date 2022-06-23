@@ -38,25 +38,25 @@ namespace DemoAPI.Controllers
             if (model != null)
             {
                 var user = userService.SignIn(model);
-                //var apiResponse = new ApiResponse();
+                var apiResponse = new ApiResponse();
                 if (user == null)
                 {
                     string res = "Invalid user";
                     //not found Failure 
-                    //apiResponse.Ok = false;
-                    //apiResponse.Status = 404;
-                    //apiResponse.Message = "Invalid Login credentials !";
+                    apiResponse.Ok = false;
+                    apiResponse.Status = 404;
+                    apiResponse.Message = "Invalid Login credentials !";
                     return Ok(res);
                 }
                 else
                 {
                     //success Login
                     string token = GenerateJSONWebToken();
-                    //apiResponse.Ok = true;
-                    //apiResponse.Status = 200;
-                    //apiResponse.Message = "Login success !";
-                    //apiResponse.Data = user;
-                    //apiResponse.Token = token; // we will send token later by JWT(JSON Web Token) call
+                    apiResponse.Ok = true;
+                    apiResponse.Status = 200;
+                    apiResponse.Message = "Login success !";
+                    apiResponse.Data = user;
+                    apiResponse.Token = token; // we will send token later by JWT(JSON Web Token) call
                     return Ok(token);
                 }
 
