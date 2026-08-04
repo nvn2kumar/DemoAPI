@@ -71,21 +71,30 @@ namespace DemoAPI.Controllers
         [Route("SignUp")]
         public IActionResult SignIUp(SignUpModel model)
         {
-            if (model != null)
+            try
             {
-                var user = userService.SignUp(model);
-                var apiResponse = new ApiResponse();
+                if (model != null)
+                {
+                    var user = userService.SignUp(model);
+                    var apiResponse = new ApiResponse();
                 
-                    apiResponse.Ok = true;
-                    apiResponse.Status = 200;
-                    apiResponse.Message = "User Created successfully !";
-                    apiResponse.Data = user;
-                    return Ok(apiResponse);
+                        apiResponse.Ok = true;
+                        apiResponse.Status = 200;
+                        apiResponse.Message = "User Created successfully !";
+                        apiResponse.Data = user;
+                        return Ok(apiResponse);
+
+                }
+                else
+                {
+                    return BadRequest();
+                }
 
             }
-            else
+            catch (Exception)
             {
-                return BadRequest();
+
+                throw;
             }
 
 
